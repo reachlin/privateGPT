@@ -63,25 +63,31 @@ class MyElmLoader(UnstructuredEmailLoader):
 
 # Map file extensions to document loaders and their arguments
 LOADER_MAPPING = {
-    ".csv": (CSVLoader, {}),
+    #".csv": (CSVLoader, {}),
     # ".docx": (Docx2txtLoader, {}),
-    ".doc": (UnstructuredWordDocumentLoader, {}),
-    ".docx": (UnstructuredWordDocumentLoader, {}),
-    ".enex": (EverNoteLoader, {}),
-    ".eml": (MyElmLoader, {}),
-    ".epub": (UnstructuredEPubLoader, {}),
-    ".html": (UnstructuredHTMLLoader, {}),
-    ".md": (UnstructuredMarkdownLoader, {}),
-    ".odt": (UnstructuredODTLoader, {}),
-    ".pdf": (PDFMinerLoader, {}),
-    ".ppt": (UnstructuredPowerPointLoader, {}),
-    ".pptx": (UnstructuredPowerPointLoader, {}),
+    # ".doc": (UnstructuredWordDocumentLoader, {}),
+    # ".docx": (UnstructuredWordDocumentLoader, {}),
+    # ".enex": (EverNoteLoader, {}),
+    # ".eml": (MyElmLoader, {}),
+    # ".epub": (UnstructuredEPubLoader, {}),
+    #".html": (UnstructuredHTMLLoader, {}),
+    # ".md": (UnstructuredMarkdownLoader, {}),
+    # ".odt": (UnstructuredODTLoader, {}),
+    # ".pdf": (PDFMinerLoader, {}),
+    # ".ppt": (UnstructuredPowerPointLoader, {}),
+    # ".pptx": (UnstructuredPowerPointLoader, {}),
+    ".html": (TextLoader, {"encoding": "utf8"}),
+    ".md": (TextLoader, {"encoding": "utf8"}),
     ".txt": (TextLoader, {"encoding": "utf8"}),
+    #".rb": (TextLoader, {"encoding": "utf8"}),
+    #".py": (TextLoader, {"encoding": "utf8"}),
+    #".tf": (TextLoader, {"encoding": "utf8"}),
     # Add more mappings for other file extensions and loaders as needed
 }
 
 
 def load_single_document(file_path: str) -> Document:
+    print(f"load_single_document: {file_path}")
     ext = "." + file_path.rsplit(".", 1)[-1]
     if ext in LOADER_MAPPING:
         loader_class, loader_args = LOADER_MAPPING[ext]
